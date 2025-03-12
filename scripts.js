@@ -1,4 +1,3 @@
-// Handle form submission to filter scholarships based on user input
 document.getElementById("scholarForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -6,13 +5,11 @@ document.getElementById("scholarForm").addEventListener("submit", function(e) {
     const gpa = parseFloat(document.getElementById("gpa").value);
     const studyArea = document.getElementById("studyArea").value;
 
-    // Get the scholarships based on the selected study area
     let results = scholarships[studyArea].filter(scholarship => gpa >= scholarship.gpaMin);
 
     displayResults(results);
 });
 
-// Function to display the scholarship results
 function displayResults(results) {
     const resultContainer = document.getElementById("results");
     resultContainer.innerHTML = "";
