@@ -1,4 +1,3 @@
-// Pre-prepared scholarships with multiple colleges in each country for each study area
 const scholarships = {
     computerScience: [
         { 
@@ -166,37 +165,32 @@ const scholarships = {
 document.getElementById("scholarForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    // Get user inputs
     const name = document.getElementById("name").value;
     const gpa = parseFloat(document.getElementById("gpa").value);
     const studyArea = document.getElementById("studyArea").value;
     const country = document.getElementById("country").value;
 
     const resultsDiv = document.getElementById("results");
-    resultsDiv.innerHTML = ""; // Clear previous results
+    resultsDiv.innerHTML = ""; 
 
-    // Check if valid inputs are provided
     if (!name || isNaN(gpa) || !studyArea || !country) {
         resultsDiv.innerHTML = "<p>Please fill out all the fields.</p>";
         return;
     }
 
-    // Get the scholarships for the selected study area
     const scholarshipsForArea = scholarships[studyArea] || [];
     let filteredScholarships = scholarshipsForArea;
 
-    // If 'Anywhere' is selected, include scholarships from all countries
     if (country !== "anywhere") {
         filteredScholarships = scholarshipsForArea.filter(scholarship => scholarship.countries.includes(country));
     }
 
-    // Filter scholarships by GPA
     filteredScholarships = filteredScholarships.filter(scholarship => gpa >= scholarship.gpaMin);
 
     if (filteredScholarships.length === 0) {
         resultsDiv.innerHTML = "<p>No scholarships found. Don't worry, work on your GPA and we'll find you the best scholarships out there!</p>";
     } else {
-        // Display the scholarships
+
         filteredScholarships.forEach(scholarship => {
             const scholarshipDiv = document.createElement("div");
             scholarshipDiv.classList.add("scholarship");
